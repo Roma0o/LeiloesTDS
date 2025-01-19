@@ -34,14 +34,22 @@ public class ProdutosDAO {
     }
     
     public ArrayList<ProdutosDTO> listarProdutos(){
-        
         return listagem;
     }
     
 
     
     public void venderProduto(int parseInt) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        try{
+        conn = new conectaDAO().connectDB();
+        prep = conn.prepareStatement("UPDATE produtos SET status ? WHERE id = ?");
+        prep.setString(1, "Vendido");
+        prep.setInt(2, parseInt);
+        prep.executeUpdate();
+        
+        }catch(SQLException ex){
+            System.out.println("Erro ao atualizar BD: " + ex.getMessage() + " ->>" + ex.getErrorCode());
+        }
     }
     
     
