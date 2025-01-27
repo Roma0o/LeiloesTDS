@@ -9,44 +9,12 @@ import javax.swing.table.DefaultTableModel;
 
 
 public class listagemVIEW extends javax.swing.JFrame {
-        Connection conn;
-        
-        
-        
-        public List<ProdutosDTO> getProdutos(){
-        String sql = "SELECT * FROM produtos";
-        
-        try{
-            conn = new conectaDAO().connectDB();
-            PreparedStatement stmt = this.conn.prepareStatement(sql);
-            ResultSet rs = stmt.executeQuery();
-            
-            List<ProdutosDTO> listaProdutos = new ArrayList<>();
-            
-            while (rs.next()) { //.next retorna verdadeiro caso exista uma próxima posição dentro do array
-                ProdutosDTO produto = new ProdutosDTO();
-                        
-                produto.setId(rs.getInt("id"));
-                produto.setNome(rs.getString("nome"));
-                produto.setValor(rs.getInt("valor"));
-                produto.setStatus(rs.getString("status"));
-                        
-                listaProdutos.add(produto);    
-            }
-            return listaProdutos;
-            
-            
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null,"Erro ao preencher a tabela! " + e);
-            return null;
-        }
-    }
-        
+    Connection conn;
+           
     private void listarProdutos(){
             try {
-            ProdutosDAO produtosdao = new ProdutosDAO();
-            
-            List<ProdutosDTO> listaprodutos = getProdutos();
+            ProdutosDAO pDAO = new ProdutosDAO();
+            List<ProdutosDTO> listaprodutos = pDAO.getProdutos();
             
             
             DefaultTableModel model = (DefaultTableModel) listaProdutos.getModel();
@@ -62,7 +30,6 @@ public class listagemVIEW extends javax.swing.JFrame {
             }
         } catch (Exception e) {
         }
-    
     }
     
     public listagemVIEW() {
