@@ -24,9 +24,10 @@ public class vendasVIEW extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }
+    
     public vendasVIEW() {
         initComponents();
-        //listarProdutos();
+        listarProdutos();
     }
 
     @SuppressWarnings("unchecked")
